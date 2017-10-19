@@ -74,41 +74,6 @@ export default {
     color: inherit;
   }
 
-  .container, .wrapper {
-    height: 100%;
-  }
-
-  .container {
-    padding-top: 60px;
-  }
-
-  .wrapper {
-    position: relative;
-  }
-
-  header {
-    position: absolute;
-    width: 100%;
-    height: 60px;
-    line-height: 60px;
-    top: 0;
-    left: 0;
-    padding: 0 20px;
-    z-index: 1;
-    box-sizing: border-box;
-    background-color: rgb(32, 160, 255);
-  }
-
-  .menu {
-    height: 100%;
-  }
-
-  .content {
-    height: 100%;
-    padding: 20px;
-    overflow: auto;
-  }
-
   .fade-enter-active,
   .fade-leave-active {
     transition: all .2s ease;

@@ -13,6 +13,45 @@ Vue.config.productionTip = false
 Vue.use(MintUI)
 Vue.use(VueAxios, axios)
 
+router.beforeEach(function (to, from, next) {
+  if (to.matched.some(record => record.meta.authorization)) {
+    if (Vue.cookie.get('token')) {
+      next()
+    } else {
+      next({
+        path: '/passport/signin',
+        query: {redirect: to.fullPath}
+      })
+    }
+  } else {
+    next()
+  }
+})
+
+axios.interceptors.request.use(function (config) {
+  if (Vue.cookie.get('token')) {
+    config.headers['authorization'] = 'Bearer ' + Vue.cookie.get('token')
+  }
+
+  return config
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error)
+})
+
+axios.interceptors.response.use(function (response) {
+  // Do something with response data
+
+  return response
+}, function (error) {
+  // Do something with response error
+  if (error.response.status === 401) {
+    router.app.$router.push({name: 'signin', query: {redirect: router.app.$route.fullPath}})
+  }
+
+  return Promise.reject(error)
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
