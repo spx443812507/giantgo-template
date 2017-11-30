@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueSocketio from 'vue-socket.io'
+import io from 'socket.io-client'
 import router from './router'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
@@ -12,6 +14,9 @@ Vue.config.productionTip = false
 
 Vue.use(MintUI)
 Vue.use(VueAxios, axios)
+Vue.use(VueSocketio, io.connect('ws://192.168.20.107/', {
+  path: '/socketio/socket.io'
+}))
 
 router.beforeEach(function (to, from, next) {
   if (to.matched.some(record => record.meta.authorization)) {
