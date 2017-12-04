@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <mt-button type="default" @click="clickButton">default</mt-button>
+    <mt-button type="default" @click="subscribe">订阅</mt-button>
+    <mt-button type="default" @click="publish">发布</mt-button>
   </div>
 </template>
 
@@ -19,10 +20,19 @@
       }
     },
     methods: {
-      clickButton: function () {
+      subscribe: function () {
         this.$socket.emit('subscribe', {
-          room: 'room3',
+          room: 'room11',
           command: 'userJoin'
+        })
+      },
+      publish: function () {
+        this.$socket.emit('publish', {
+          room: 'room11',
+          command: 'userJoin',
+          data: {
+            name: 'spx'
+          }
         })
       }
     }

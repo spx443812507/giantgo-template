@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 
 Vue.use(MintUI)
 Vue.use(VueAxios, axios)
-Vue.use(VueSocketio, io.connect('ws://192.168.20.107/', {
+Vue.use(VueSocketio, io.connect('ws://localhost/webinar', {
   path: '/socketio/socket.io'
 }))
 
